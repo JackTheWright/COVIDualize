@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <!-- I recommend you host this file on your own, since this will change without warning -->
+    <script src="./datamaps.world.min.js"></script>
+    <h2>CMPT 340 COVID-19 Prediction</h2>
+
+    <div id="containerOption">
+      <!-- <div id="sliderContainer">
+        <input id="timeslide" type="range" min="0" max="11" value="0" step="1"/><br>
+        <span id="range">January</span>
+      </div> -->
+      <h2 id = "option_label">Options:</h2>
+      <B name = "withVacc",type = "button" value = "With Vaccine Administered">
+        <button id = "noPrev" , type="button" onclick="option_click(this.id)">No Preventive Actions</button>
+        <button id = "withSD" , type="button" onclick="option_click(this.id)">With Social Distancing</button>
+        <button id = "withSDandVacc" , type="button" onclick="option_click(this.id)">With Social Distancing and Vaccine</button>
+      <br>
+      <br>
+    </div>
+    <div id="containerMap" style="position: relative; width: 80%; max-height: 450px;"></div>
+    <br>
+    <br>     
+    <br>
+   
+
+    <script>
+      var map = new Datamap({
+        scope: 'world',
+        id:"the_map",
+        responsive:true,
+        element: document.getElementById('containerMap'),
+        projection: 'mercator',
+        height: 500,
+        fills: {
+          defaultFill: '#f0af0a',
+          lt50: 'rgba(0,244,244,0.9)',
+          gt50: 'red'
+        },
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                alert(geography.properties.name);
+            });
+        },
+        
+        data: {
+          USA: {fillKey: 'lt50'  , count:2000},
+          RUS: {fillKey: 'lt50' , count:2000 },
+          CAN: {fillKey: 'lt50'  , count:2000},
+          BRA: {fillKey: 'gt50'  , count:2000},
+          ARG: {fillKey: 'gt50' , count:2000},
+          COL: {fillKey: 'gt50' , count:2000 },
+          AUS: {fillKey: 'gt50'  , count:2000},
+          ZAF: {fillKey: 'gt50'  , count:2000},
+          MAD: {fillKey: 'gt50' , count:2000 }       
+        }
+      })
+
+
+
+    function option_click(clicked_id)
+    {
+      map.bubbles([
+      {name: 'Hot', latitude: 21.32, longitude: 5.32, radius: 10, fillKey: 'gt50', count:2000 },
+      {name: 'Chilly', latitude: -25.32, longitude: 120.32, radius: 18, fillKey: 'lt50', count:2000},
+      {name: 'Hot again', latitude: 21.32, longitude: -84.32, radius: 8, fillKey: 'gt50', count:2000},
+
+    ], {
+       popupTemplate: function(geo, data) {
+         return "<div class='hoverinfo'>It is " + data.count + "</div>";
+       }
+    });
+    }
+    </script>
+    
+</body>
