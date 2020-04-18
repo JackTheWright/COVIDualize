@@ -93,7 +93,7 @@ def MainDataImport():
     covidCanadaTotalRecovered_df.reset_index(inplace=True)
     print(covidCanadaTotalRecovered_df)
 
-    covidCanadaTotal_df['Active Cases'] = covidCanadaTotal_df.Cases - (covidCanadaTotalDeaths_df.Deaths + covidCanadaTotalRecovered_df.Recoveries)
+    covidCanadaTotal_df['Active_Cases'] = covidCanadaTotal_df.Cases - (covidCanadaTotalDeaths_df.Deaths + covidCanadaTotalRecovered_df.Recoveries)
     
     if DEBUG:
         print(covidCanadaTotal_df)
@@ -124,7 +124,7 @@ def WorstCaseDataImport():
     covidWorseTotalRecovered_df.index.name = 'Date'
     covidWorseTotalRecovered_df.reset_index(inplace=True)
 
-    covidWorseTotal_df['Active Cases'] = covidWorseTotal_df.Cases - (covidWorseTotalDeaths_df.Deaths + covidWorseTotalRecovered_df.Recoveries)
+    covidWorseTotal_df['Active_Cases'] = covidWorseTotal_df.Cases - (covidWorseTotalDeaths_df.Deaths + covidWorseTotalRecovered_df.Recoveries)
     print(covidWorseTotal_df)
     return
 
@@ -150,7 +150,7 @@ def BestCaseDataImport():
     covidBestTotalRecovered_df.index.name = 'Date'
     covidBestTotalRecovered_df.reset_index(inplace=True)
 
-    covidBestTotal_df['Active Cases'] = covidBestTotal_df.Cases - (covidBestTotalDeaths_df.Deaths + covidBestTotalRecovered_df.Recoveries)
+    covidBestTotal_df['Active_Cases'] = covidBestTotal_df.Cases - (covidBestTotalDeaths_df.Deaths + covidBestTotalRecovered_df.Recoveries)
     print(covidBestTotal_df)
 
     return
@@ -162,7 +162,7 @@ def main():
     BestCaseDataImport()
     chart=alt.Chart(covidCanadaTotal_df).mark_line().encode(
         x='Date',
-        y='Active Cases'
+        y='Active_Cases'
     ).interactive()
     
     chart.show()
