@@ -25,8 +25,8 @@ def MainDataImport():
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
         ['Country/Region', 'Lat', 'Long'], axis=1)
 
-    # if DEBUG:
-    #     print(covidCanadaTotalCases_df)
+    if DEBUG:
+         print(covidCanadaTotalCases_df)
 
     columninds = ['Cases']
 
@@ -82,8 +82,8 @@ def MainDataImport():
     covidSA_df.index.name = 'Date'
     covidSA_df.reset_index(inplace=True)
 
-    # if DEBUG:
-    #     print(covidAB_df)
+    if DEBUG:
+         print(covidAB_df)
 
     # Drop the province column and sum them all up to create the total per day for all provinces. Convert from series to df for Altair
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
@@ -93,7 +93,9 @@ def MainDataImport():
     covidCanadaTotal_df.columns = columninds
     covidCanadaTotal_df.index.name = 'Date'
     covidCanadaTotal_df.reset_index(inplace=True)
-    # print(covidCanadaTotal_df)
+    
+    if DEBUG:
+        print(covidCanadaTotal_df)
 
     # Drop all columns for Deaths. Convert them to the same form as total cases above.
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.drop(
@@ -104,14 +106,18 @@ def MainDataImport():
     covidCanadaTotalDeaths_df.columns = ['Deaths']
     covidCanadaTotalDeaths_df.index.name = 'Date'
     covidCanadaTotalDeaths_df.reset_index(inplace=True)
-    # print(covidCanadaTotalDeaths_df)
+
+    if DEBUG:
+        print(covidCanadaTotalDeaths_df)
 
     # Recovered is not by province so requires less clean up.
     covidCanadaTotalRecovered_df = covidCanadaTotalRecovered_df.transpose()
     covidCanadaTotalRecovered_df.columns = ['Recoveries']
     covidCanadaTotalRecovered_df.index.name = 'Date'
     covidCanadaTotalRecovered_df.reset_index(inplace=True)
-    # print(covidCanadaTotalRecovered_df)
+
+    if DEBUG:
+        print(covidCanadaTotalRecovered_df)
 
     covidCanadaTotal_df['Active_Cases'] = covidCanadaTotal_df.Cases - \
         (covidCanadaTotalDeaths_df.Deaths + covidCanadaTotalRecovered_df.Recoveries)
@@ -119,8 +125,6 @@ def MainDataImport():
     if DEBUG:
         print(covidCanadaTotal_df)
 
-    # if DEBUG:
-    #     print(covidCanadaTotal_df)
 
     return covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covidAB_df, covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df
 
