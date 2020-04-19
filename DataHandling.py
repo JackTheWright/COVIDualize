@@ -82,8 +82,8 @@ def MainDataImport():
     covidSA_df.index.name = 'Date'
     covidSA_df.reset_index(inplace=True)
 
-    # if DEBUG:
-    #     print(covidAB_df)
+    if DEBUG:
+        print(covidAB_df)
 
     # Drop the province column and sum them all up to create the total per day for all provinces. Convert from series to df for Altair
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
@@ -118,9 +118,6 @@ def MainDataImport():
 
     if DEBUG:
         print(covidCanadaTotal_df)
-
-    # if DEBUG:
-    #     print(covidCanadaTotal_df)
 
     return covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covidAB_df, covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df
 
@@ -189,7 +186,7 @@ def BestCaseDataImport():
 
 
 def main():
-    covidCanadaTotal_df, covidAB_df, covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df = MainDataImport()
+    covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covicovidAB_df, covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df = MainDataImport()
     WorstCaseDataImport()
     BestCaseDataImport()
     chart = alt.Chart(covidCanadaTotal_df).mark_line().encode(
@@ -198,6 +195,9 @@ def main():
     ).interactive()
 
     chart.show()
+    listDF = [covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covicovidAB_df,
+              covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df]
+    trainData(listDF)
     return
 
 
