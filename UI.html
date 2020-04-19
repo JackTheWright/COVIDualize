@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>COVID19</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>COVIDualize</h1>
+        <h3>COVID19 Prediction Model (Group 11)</h3>
+    </div>
+   
+    <div class="sidebar">
+        <div id="containerOption">
+            <br>
+            <input type="button" id='script' class="button" value="No Preventive Actions">
+            <input type="button" class="button" value="With Social Distancing">
+            <input type="button" class="button" value="Both Social Distancing and Vaccines">
+            <br>
+            <br>
+            <h4>Period</h4>
+            <h4>
+                <div id="sliderContainer" style="align=">
+                    <input id="timeslide" type="range" min="1" max="60" value="0" step="1"/><br>
+                    <span id="range">1 day(s)</span>
+                </div>
+            </h4>
+            <script>
+                var slider = document.getElementById("timeslide");
+                var output = document.getElementById("range"); 
+                slider.oninput = function() {
+                    output.innerHTML = this.value + " day(s)";
+                }
+            </script>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div id="vis"></div>
+        <script type="text/javascript">
+            // var myInit = { method : 'GET',
+            //                 headers: {
+            //                     'Content-Type' : 'application/json'
+            //                 },
+            //                 mode: 'cors',
+            //                 cache: 'default' };
+            // let myRequest = new Request("./chart.json", myInit)
+            
+            // var spec = fetch(myRequest)
+            //             .then(function(resp) {
+            //                 return resp.json();
+            //             });
+
+            var spec = 
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+                "config": {
+                    "view": {
+                    "continuousHeight": 500,
+                    "continuousWidth": 500
+                    }
+                },
+                "data": {
+                    "url": "https://vega.github.io/vega-datasets/data/cars.json"
+                },
+                "encoding": {
+                    "color": {
+                    "field": "Origin",
+                    "type": "nominal"
+                    },
+                    "x": {
+                    "field": "Horsepower",
+                    "type": "quantitative"
+                    },
+                    "y": {
+                    "field": "Miles_per_Gallon",
+                    "type": "quantitative"
+                    }
+                },
+                "mark": "point"
+            }
+            var opt = {"renderer": "canvas", "actions": true};
+            vegaEmbed("#vis", spec, opt);
+            </script>
+    </div>
+
+
+</body>
+</html>
