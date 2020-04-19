@@ -152,7 +152,7 @@ def trainData(listDF):
     #forecast_set = predict(clf, active_df, X, 30, 30)
     times = 1
     forecast_set = np.zeros(times)
-    forecast_out = 40
+    forecast_out = 30
     X_predict = X[-forecast_out:]
     forecast_set = clf.predict(X_predict)
     print(forecast_set)
