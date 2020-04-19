@@ -2,7 +2,7 @@ import pandas as pd
 import altair as alt
 import numpy as np
 import math
-from sklearn import linear_model, preprocessing, model_selection
+from sklearn import linear_model, preprocessing, model_selection, svm
 import datetime
 
 
@@ -35,17 +35,23 @@ def trainData(listDF):
     active_df = active_df.merge(covidQC_df, on='Date')
     active_df = active_df.merge(covidSA_df, on='Date')
 
-    forecast_out = int(math.ceil(0.1*len(active_df)))
+    # forecast_col = 'Active_Cases'
+    forecast_out = int(math.ceil(0.05*len(active_df)))
 
-    X = np.array(active_df.drop(['Active Cases', 'Date'], axis=1))
-    y = np.array(active_df['Active Cases'])
+    active_df['Lag_Case_1'] = active_df['Active_Cases'].shift(-1)
+    active_df['Lag_Case_2'] = active_df['Active_Cases'].shift(-2)
+    # active_df['Lag'] = active_df[forecast_col].shift(-forecast_out)
+    active_df.dropna(inplace=True)
+
+    X = np.array(active_df.drop(['Active_Cases', 'Date'], axis=1))
+    y = np.array(active_df['Active_Cases'])
     X = preprocessing.scale(X)
     X_predict = X[-forecast_out:]
 
     X_train, X_test, y_train, y_test = model_selection.train_test_split(
-        X, y, test_size=0.4)
+        X, y, test_size=0.1)
 
-    clf = linear_model.SGDRegressor()
+    clf = svm.SVR(C=1.0)
     clf.fit(X_train, y_train)
     accuracy = clf.score(X_test, y_test)
     print(accuracy)
@@ -54,7 +60,7 @@ def trainData(listDF):
     print(forecast_set)
 
     predict_df = active_df.drop(
-        ['Cases', 'Cases_x', 'Cases_y', 'Deaths', 'Recoveries'], 1)
+        ['Cases', 'Cases_x', 'Cases_y', 'Deaths', 'Recoveries', 'Lag_Case_1', 'Lag_Case_2'], 1)
 
     last_date = "2020-04-17"
     last_date = datetime.datetime.strptime(last_date, "%Y-%m-%d")
@@ -71,7 +77,7 @@ def trainData(listDF):
 
     chart = alt.Chart(predict_df).mark_line().encode(
         x='Date',
-        y='Active Cases'
+        y='Active_Cases'
     ).interactive()
 
     chart.show()
