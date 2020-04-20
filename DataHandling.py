@@ -2,7 +2,7 @@
 
 import pandas
 import altair as alt
-from SGDRegression import trainData
+from Training import trainData
 
 DEBUG = False
 
@@ -36,46 +36,55 @@ def MainDataImport():
     covidAB_df.columns = columninds
     covidAB_df.index.name = 'Date'
     covidAB_df.reset_index(inplace=True)
+
     covidBC_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'British Columbia']).drop(
         ['Province'], axis=1))).transpose()
     covidBC_df.columns = columninds
     covidBC_df.index.name = 'Date'
     covidBC_df.reset_index(inplace=True)
+
     covidMN_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Manitoba']).drop(
         ['Province'], axis=1))).transpose()
     covidMN_df.columns = columninds
     covidMN_df.index.name = 'Date'
     covidMN_df.reset_index(inplace=True)
+
     covidNB_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'New Brunswick']).drop(
         ['Province'], axis=1))).transpose()
     covidNB_df.columns = columninds
     covidNB_df.index.name = 'Date'
     covidNB_df.reset_index(inplace=True)
+
     covidNL_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Newfoundland and Labrador']).drop(
         ['Province'], axis=1))).transpose()
     covidNL_df.columns = columninds
     covidNL_df.index.name = 'Date'
     covidNL_df.reset_index(inplace=True)
+
     covidNS_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Nova Scotia']).drop(
         ['Province'], axis=1))).transpose()
     covidNS_df.columns = columninds
     covidNS_df.index.name = 'Date'
     covidNS_df.reset_index(inplace=True)
+
     covidON_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Ontario']).drop(
         ['Province'], axis=1))).transpose()
     covidON_df.columns = columninds
     covidON_df.index.name = 'Date'
     covidON_df.reset_index(inplace=True)
+
     covidPE_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Prince Edward Island']).drop(
         ['Province'], axis=1))).transpose()
     covidPE_df.columns = columninds
     covidPE_df.index.name = 'Date'
     covidPE_df.reset_index(inplace=True)
+
     covidQC_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Quebec']).drop(
         ['Province'], axis=1))).transpose()
     covidQC_df.columns = columninds
     covidQC_df.index.name = 'Date'
     covidQC_df.reset_index(inplace=True)
+
     covidSA_df = (((covidCanadaTotalCases_df.loc[covidCanadaTotalCases_df['Province'] == 'Saskatchewan']).drop(
         ['Province'], axis=1))).transpose()
     covidSA_df.columns = columninds
@@ -88,6 +97,7 @@ def MainDataImport():
     # Drop the province column and sum them all up to create the total per day for all provinces. Convert from series to df for Altair
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
         ['Province'], axis=1)
+
     covidCanadaTotal_df = covidCanadaTotalCases_df.sum(axis=0, skipna=True)
     covidCanadaTotal_df = covidCanadaTotal_df.to_frame()
     covidCanadaTotal_df.columns = columninds
@@ -98,12 +108,80 @@ def MainDataImport():
         print(covidCanadaTotal_df)
 
     # Drop all columns for Deaths. Convert them to the same form as total cases above.
+
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.drop(
-        ['Province', 'Country/Region', 'Lat', 'Long'], axis=1)
+        ['Country/Region', 'Lat', 'Long'], axis=1)
+
+    columninds = ['Deaths']
+    
+    # Split the covid data up by provice. One data frame per province, then drop the province column.
+    covidABDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Alberta']).drop(
+        ['Province'], axis=1))).transpose()
+    covidABDeath_df.columns = columninds
+    covidABDeath_df.index.name = 'Date'
+    covidABDeath_df.reset_index(inplace=True)
+
+    covidBCDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'British Columbia']).drop(
+        ['Province'], axis=1))).transpose()
+    covidBCDeath_df.columns = columninds
+    covidBCDeath_df.index.name = 'Date'
+    covidBCDeath_df.reset_index(inplace=True)
+
+    covidMNDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Manitoba']).drop(
+        ['Province'], axis=1))).transpose()
+    covidMNDeath_df.columns = columninds
+    covidMNDeath_df.index.name = 'Date'
+    covidMNDeath_df.reset_index(inplace=True)
+
+    covidNBDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'New Brunswick']).drop(
+        ['Province'], axis=1))).transpose()
+    covidNBDeath_df.columns = columninds
+    covidNBDeath_df.index.name = 'Date'
+    covidNBDeath_df.reset_index(inplace=True)
+
+    covidNLDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Newfoundland and Labrador']).drop(
+        ['Province'], axis=1))).transpose()
+    covidNLDeath_df.columns = columninds
+    covidNLDeath_df.index.name = 'Date'
+    covidNLDeath_df.reset_index(inplace=True)
+
+    covidNSDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Nova Scotia']).drop(
+        ['Province'], axis=1))).transpose()
+    covidNSDeath_df.columns = columninds
+    covidNSDeath_df.index.name = 'Date'
+    covidNSDeath_df.reset_index(inplace=True)
+
+    covidONDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Ontario']).drop(
+        ['Province'], axis=1))).transpose()
+    covidONDeath_df.columns = columninds
+    covidONDeath_df.index.name = 'Date'
+    covidONDeath_df.reset_index(inplace=True)
+
+    covidPEDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Prince Edward Island']).drop(
+        ['Province'], axis=1))).transpose()
+    covidPEDeath_df.columns = columninds
+    covidPEDeath_df.index.name = 'Date'
+    covidPEDeath_df.reset_index(inplace=True)
+
+    covidQCDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Quebec']).drop(
+        ['Province'], axis=1))).transpose()
+    covidQCDeath_df.columns = columninds
+    covidQCDeath_df.index.name = 'Date'
+    covidQCDeath_df.reset_index(inplace=True)
+    
+    covidSADeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Saskatchewan']).drop(
+        ['Province'], axis=1))).transpose()
+    covidSADeath_df.columns = columninds
+    covidSADeath_df.index.name = 'Date'
+    covidSADeath_df.reset_index(inplace=True)
+
+    covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.drop(
+        ['Province'], axis=1)
+
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.sum(
         axis=0, skipna=True)
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.to_frame()
-    covidCanadaTotalDeaths_df.columns = ['Deaths']
+    covidCanadaTotalDeaths_df.columns = ['Total_Deaths']
     covidCanadaTotalDeaths_df.index.name = 'Date'
     covidCanadaTotalDeaths_df.reset_index(inplace=True)
 
@@ -120,12 +198,16 @@ def MainDataImport():
         print(covidCanadaTotalRecovered_df)
 
     covidCanadaTotal_df['Active_Cases'] = covidCanadaTotal_df.Cases - \
-        (covidCanadaTotalDeaths_df.Deaths + covidCanadaTotalRecovered_df.Recoveries)
+        (covidCanadaTotalDeaths_df.Total_Deaths + covidCanadaTotalRecovered_df.Recoveries)
 
     if DEBUG:
         print(covidCanadaTotal_df)
 
-    return covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covidAB_df, covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df
+    return covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, \
+        covidAB_df, covidABDeath_df, covidBC_df, covidBCDeath_df, covidMN_df, covidMNDeath_df, \
+        covidNB_df, covidNBDeath_df, covidNL_df, covidNLDeath_df, covidNS_df, covidNSDeath_df, \
+        covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df, \
+        covidSA_df, covidSADeath_df
 
 
 def WorstCaseDataImport():
@@ -156,7 +238,7 @@ def WorstCaseDataImport():
     covidWorseTotal_df['Active_Cases'] = covidWorseTotal_df.Cases - \
         (covidWorseTotalDeaths_df.Deaths + covidWorseTotalRecovered_df.Recoveries)
     print(covidWorseTotal_df)
-    return
+    return covidWorseTotalDeaths_df
 
 
 def BestCaseDataImport():
@@ -188,21 +270,28 @@ def BestCaseDataImport():
         (covidBestTotalDeaths_df.Deaths + covidBestTotalRecovered_df.Recoveries)
     print(covidBestTotal_df)
 
-    return
+    return covidBestTotalDeaths_df
 
 
 def main():
-    covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covicovidAB_df, covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df = MainDataImport()
-    WorstCaseDataImport()
-    BestCaseDataImport()
+    covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, \
+        covidAB_df, covidABDeath_df, covidBC_df, covidBCDeath_df, covidMN_df, covidMNDeath_df, \
+        covidNB_df, covidNBDeath_df, covidNL_df, covidNLDeath_df, covidNS_df, covidNSDeath_df, \
+        covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df, \
+        covidSA_df, covidSADeath_df = MainDataImport()
+    worstdeaths = WorstCaseDataImport()
+    bestdeaths = BestCaseDataImport()
     chart = alt.Chart(covidCanadaTotal_df).mark_line().encode(
         x='Date',
         y='Active_Cases'
     ).interactive()
 
     chart.show()
-    listDF = [covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covicovidAB_df,
-              covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df]
+    listDF = [covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, \
+        covidAB_df, covidABDeath_df, covidBC_df, covidBCDeath_df, covidMN_df, covidMNDeath_df, \
+        covidNB_df, covidNBDeath_df, covidNL_df, covidNLDeath_df, covidNS_df, covidNSDeath_df, \
+        covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df, \
+        covidSA_df, covidSADeath_df, worstdeaths, bestdeaths]
     trainData(listDF)
     return
 

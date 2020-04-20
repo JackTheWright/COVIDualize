@@ -65,7 +65,7 @@ def chart(predict_df):
     print(trimmed_data)
     chart = alt.Chart(trimmed_data).mark_line().encode(
         x='Date',
-        y='Active_Cases'
+        y='Total_Deaths'
     ).interactive()
 
     chart.show()
@@ -76,29 +76,46 @@ def trainData(listDF):
     covidCanadaTotalDeaths_df = listDF[1]
     covidCanadaTotalRecovered_df = listDF[2]
     covidAB_df = listDF[3]
-    covidBC_df = listDF[4]
-    covidMN_df = listDF[5]
-    covidNB_df = listDF[6]
-    covidNL_df = listDF[7]
-    covidNS_df = listDF[8]
-    covidON_df = listDF[9]
-    covidPE_df = listDF[10]
-    covidQC_df = listDF[11]
-    covidSA_df = listDF[12]
+    covidABDeath_df = listDF[4]
+    covidBC_df = listDF[5]
+    covidBCDeath_df = listDF[6]
+    covidMN_df = listDF[7]
+    covidMNDeath_df = listDF[8]
+    covidNB_df = listDF[9]
+    covidNBDeath_df = listDF[10]
+    covidNL_df = listDF[11]
+    covidNLDeath_df = listDF[12]
+    covidNS_df = listDF[13]
+    covidNSDeath_df = listDF[14]
+    covidON_df = listDF[15]
+    covidONDeath_df = listDF[16]
+    covidPE_df = listDF[17]
+    covidPEDeath_df = listDF[18]
+    covidQC_df = listDF[19]
+    covidQCDeath_df = listDF[20]
+    covidSA_df = listDF[21]
+    covidSADeath_df = listDF[22]
+    worstdeaths = listDF[23]
+    bestdeaths = listDF[24]
 
     active_df = covidCanadaTotal_df
     active_df = active_df.merge(covidCanadaTotalDeaths_df, on='Date')
     active_df = active_df.merge(covidCanadaTotalRecovered_df, on='Date')
-    active_df = active_df.merge(covidAB_df, on='Date')
-    active_df = active_df.merge(covidBC_df, on='Date')
-    active_df = active_df.merge(covidMN_df, on='Date')
-    active_df = active_df.merge(covidNB_df, on='Date')
-    active_df = active_df.merge(covidNL_df, on='Date')
-    active_df = active_df.merge(covidNS_df, on='Date')
-    active_df = active_df.merge(covidON_df, on='Date')
-    active_df = active_df.merge(covidPE_df, on='Date')
-    active_df = active_df.merge(covidQC_df, on='Date')
-    active_df = active_df.merge(covidSA_df, on='Date')
+    active_df = active_df.merge(covidABDeath_df, on='Date')
+    active_df = active_df.merge(covidBCDeath_df, on='Date')
+    active_df = active_df.merge(covidMNDeath_df, on='Date')
+    active_df = active_df.merge(covidNBDeath_df, on='Date')
+    active_df = active_df.merge(covidNLDeath_df, on='Date')
+    active_df = active_df.merge(covidNSDeath_df, on='Date')
+    active_df = active_df.merge(covidONDeath_df, on='Date')
+    active_df = active_df.merge(covidPEDeath_df, on='Date')
+    active_df = active_df.merge(covidQCDeath_df, on='Date')
+    active_df = active_df.merge(covidSADeath_df, on='Date')
+    active_df = active_df.merge(worstdeaths, on='Date')
+    active_df = active_df.merge(bestdeaths, on='Date')
+
+    print(active_df)
+    
 
     # X = np.array(active_df.drop(['Active_Cases', 'Date'], axis=1))
     # y = np.array(active_df['Active_Cases'])
@@ -148,8 +165,8 @@ def trainData(listDF):
     # active_df['Lag'] = active_df[forecast_col].shift(-forecast_out)
     active_df.dropna(inplace=True)
 
-    X = np.array(active_df.drop(['Active_Cases', 'Date'], axis=1))
-    y = np.array(active_df['Active_Cases'])
+    X = np.array(active_df.drop(['Total_Deaths', 'Date'], axis=1))
+    y = np.array(active_df['Total_Deaths'])
     X = preprocessing.scale(X)
     # X_predict = X[-forecast_out:]
 
@@ -167,13 +184,12 @@ def trainData(listDF):
     X_predict = X[-forecast_out:]
     # print(X_predict)
 
-    X_predict = np.append(X_predict, X_predict, axis=0)
     forecast_set = clf.predict(X_predict)
 
     predict_df = active_df.drop(
-        ['Cases', 'Cases_x', 'Cases_y', 'Deaths', 'Recoveries', ], 1)
+        ['Deaths_x', 'Deaths_y', 'Recoveries', 'Active_Cases', 'Cases'], 1)
 
     # expoIncrease(predict_df, forecast_set)
-    levelOff(predict_df, forecast_set, 60)
+    levelOff(predict_df, forecast_set, 30)
 
     return
