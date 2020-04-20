@@ -24,7 +24,7 @@ def expoIncrease(predict_df, forecast_set):
         index += 1
         mult *= 1.03
 
-    chart(predict_df)
+    return predict_df
 
 
 def continueTrend(predict_df, forecast_set):
@@ -45,7 +45,7 @@ def continueTrend(predict_df, forecast_set):
         index += 1
         mult *= 1
 
-    chart(predict_df)
+    return predict_df
 
 
 def levelOff(predict_df, forecast_set):
@@ -68,19 +68,33 @@ def levelOff(predict_df, forecast_set):
         index += 1
         mult *= 0.988
 
-    chart(predict_df)
+    return predict_df
 
 
-def chart(predict_df):
+def chart(worst_df, norm_df, best_df):
     # charts data using altair with the input predict_df
-    trimmed_data = predict_df.loc[50:]
-    # print(trimmed_data)
-    chart = alt.Chart(trimmed_data).mark_line().encode(
-        x='Date',
-        y='Active_Cases'
-    ).interactive()
+    trimmed_worst = worst_df.loc[50:]
+    trimmed_worst.columns = ['Date', 'Worst']
+    trimmed_norm = norm_df.loc[50:]
+    trimmed_norm.columns = ['Date', 'Norm']
+    trimmed_best = best_df.loc[50:]
+    trimmed_best.columns = ['Date', 'Best']
+
+    trimmed_total = trimmed_worst.merge(trimmed_norm, on='Date')
+    trimmed_total = trimmed_total.merge(trimmed_best, on='Date')
+    print(trimmed_total)
+
+    chart = alt.Chart(trimmed_total).transform_fold(
+        ['Worst', 'Norm', 'Best'],
+        as_=['Curve', 'Active Cases']
+    ).mark_line().encode(
+        x='Date:T',
+        y='Active Cases:Q',
+        color='Curve:N'
+    )
 
     chart.show()
+    chart.save("JSON_charts/CAN_Full_Chart.json")
 
 
 def trainData(listDF):
@@ -162,12 +176,17 @@ def trainData(listDF):
     forecast_set = clf.predict(X_predict)
 
     # create prediction data frame
-    print(active_df)
-    predict_df = active_df.drop(
+    predict_worst_df = active_df.drop(
+        ['Cases', 'Cases_x', 'Cases_y', 'Total_Deaths', 'Recoveries'], 1)
+    predict_norm_df = active_df.drop(
+        ['Cases', 'Cases_x', 'Cases_y', 'Total_Deaths', 'Recoveries'], 1)
+    predict_best_df = active_df.drop(
         ['Cases', 'Cases_x', 'Cases_y', 'Total_Deaths', 'Recoveries'], 1)
 
-    expoIncrease(predict_df, forecast_set)
-    continueTrend(predict_df, forecast_set)
-    levelOff(predict_df, forecast_set)
+    inc_df = expoIncrease(predict_worst_df, forecast_set)
+    con_df = continueTrend(predict_norm_df, forecast_set)
+    lev_df = levelOff(predict_best_df, forecast_set)
+
+    chart(inc_df, con_df, lev_df)
 
     return
