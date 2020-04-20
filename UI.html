@@ -16,54 +16,68 @@
         <h3>COVID19 Prediction Model (Group 11)</h3>
     </div>
    
+    <!-- Define a class for the side bar -->
     <div class="sidebar">
         <div id="containerOption">
             <br>
-            <input type="button" id='script' class="button" value="No Preventive Actions">
-            <input type="button" class="button" value="With Social Distancing">
-            <input type="button" class="button" value="Both Social Distancing and Vaccines">
-            <br>
-            <br>
-            <h4>Period</h4>
+            <!-- Define drop down menu for countries -->
             <h4>
-                <div id="sliderContainer" style="align=">
-                    <input id="timeslide" type="range" min="1" max="60" value="0" step="1"/><br>
-                    <span id="range">1 day(s)</span>
+                <div class="dropdown" id="first">
+                    <button class="dropbtn" id="country">Choose a Country</button>
+                    <div class="dropdown-content">
+                    <a href="#" onclick="overall(1)">Canada</a>
+                    <a href="#" onclick="overall(2)">USA</a>
+                    <a href="#" onclick="overall(3)">South Korea</a>
+                    </div>
+                </div>
+            </h4>
+            <!-- Define drop down menu for period options -->
+            <h4>
+                <div class="dropdown" id="second">
+                    <button class="dropbtn" id="week">Choose a specific period</button>
+                    <div class="dropdown-content">
+                    <a href="#" onclick="per_week(1)">1st week</a>
+                    <a href="#" onclick="per_week(2)">2nd week</a>
+                    <a href="#" onclick="per_week(3)">3rd week</a>
+                    <a href="#" onclick="per_week(4)">4th week</a>
+                    </div>
                 </div>
             </h4>
             <script>
-                var slider = document.getElementById("timeslide");
-                var output = document.getElementById("range"); 
-                slider.oninput = function() {
-                    output.innerHTML = this.value + " day(s)";
+                document.getElementById("second").style.visibility = "hidden";
+                function changeVisibility() {
+                    document.getElementById("second").style.visibility = "visible";
                 }
             </script>
+            <br>
         </div>
     </div>
     
+    <!-- Define the class for the page content where graphs will be -->
     <div class="content">
+        <br>
         <div id="vis"></div>
+        <script>
+            Element.prototype.remove = function() {
+                this.parentElement.removeChild(this);
+            }
+            NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+                for(var i = this.length - 1; i >= 0; i--) {
+                    if(this[i] && this[i].parentElement) {
+                        this[i].parentElement.removeChild(this[i]);
+                    }
+                }
+            }
+        </script>
         <script type="text/javascript">
-            // var myInit = { method : 'GET',
-            //                 headers: {
-            //                     'Content-Type' : 'application/json'
-            //                 },
-            //                 mode: 'cors',
-            //                 cache: 'default' };
-            // let myRequest = new Request("./chart.json", myInit)
-            
-            // var spec = fetch(myRequest)
-            //             .then(function(resp) {
-            //                 return resp.json();
-            //             });
-
-            var spec = 
-            {
+            var a = {"config": {"view": {"continuousWidth": 0.25, "continuousHeight": 500}}, "data": {"name": "data-f5b650ea3ea1b5176b0464306eb03049"}, "mark": "line", "encoding": {"x": {"type": "nominal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active_Cases"}}, "selection": {"selector001": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-f5b650ea3ea1b5176b0464306eb03049": [{"Date": "2020-01-22", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-23", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-24", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-25", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-26", "Cases": 1, "Active_Cases": 1}, {"Date": "2020-01-27", "Cases": 1, "Active_Cases": 1}, {"Date": "2020-01-28", "Cases": 2, "Active_Cases": 2}, {"Date": "2020-01-29", "Cases": 2, "Active_Cases": 2}, {"Date": "2020-01-30", "Cases": 2, "Active_Cases": 2}, {"Date": "2020-01-31", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-01", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-02", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-03", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-04", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-05", "Cases": 5, "Active_Cases": 5}, {"Date": "2020-02-06", "Cases": 5, "Active_Cases": 5}, {"Date": "2020-02-07", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-08", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-09", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-10", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-11", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-12", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-13", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-14", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-15", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-16", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-17", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-18", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-19", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-20", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-21", "Cases": 9, "Active_Cases": 6}, {"Date": "2020-02-22", "Cases": 9, "Active_Cases": 6}, {"Date": "2020-02-23", "Cases": 9, "Active_Cases": 6}, {"Date": "2020-02-24", "Cases": 10, "Active_Cases": 7}, {"Date": "2020-02-25", "Cases": 11, "Active_Cases": 8}, {"Date": "2020-02-26", "Cases": 11, "Active_Cases": 8}, {"Date": "2020-02-27", "Cases": 13, "Active_Cases": 7}, {"Date": "2020-02-28", "Cases": 14, "Active_Cases": 8}, {"Date": "2020-02-29", "Cases": 20, "Active_Cases": 14}, {"Date": "2020-03-01", "Cases": 24, "Active_Cases": 18}, {"Date": "2020-03-02", "Cases": 27, "Active_Cases": 21}, {"Date": "2020-03-03", "Cases": 30, "Active_Cases": 24}, {"Date": "2020-03-04", "Cases": 33, "Active_Cases": 27}, {"Date": "2020-03-05", "Cases": 37, "Active_Cases": 31}, {"Date": "2020-03-06", "Cases": 49, "Active_Cases": 43}, {"Date": "2020-03-07", "Cases": 54, "Active_Cases": 46}, {"Date": "2020-03-08", "Cases": 64, "Active_Cases": 56}, {"Date": "2020-03-09", "Cases": 77, "Active_Cases": 68}, {"Date": "2020-03-10", "Cases": 79, "Active_Cases": 70}, {"Date": "2020-03-11", "Cases": 108, "Active_Cases": 99}, {"Date": "2020-03-12", "Cases": 117, "Active_Cases": 108}, {"Date": "2020-03-13", "Cases": 193, "Active_Cases": 184}, {"Date": "2020-03-14", "Cases": 198, "Active_Cases": 189}, {"Date": "2020-03-15", "Cases": 252, "Active_Cases": 243}, {"Date": "2020-03-16", "Cases": 415, "Active_Cases": 402}, {"Date": "2020-03-17", "Cases": 478, "Active_Cases": 464}, {"Date": "2020-03-18", "Cases": 657, "Active_Cases": 640}, {"Date": "2020-03-19", "Cases": 800, "Active_Cases": 782}, {"Date": "2020-03-20", "Cases": 943, "Active_Cases": 922}, {"Date": "2020-03-21", "Cases": 1277, "Active_Cases": 1248}, {"Date": "2020-03-22", "Cases": 1469, "Active_Cases": 1439}, {"Date": "2020-03-23", "Cases": 2088, "Active_Cases": 2054}, {"Date": "2020-03-24", "Cases": 2790, "Active_Cases": 2655}, {"Date": "2020-03-25", "Cases": 3251, "Active_Cases": 3039}, {"Date": "2020-03-26", "Cases": 4038, "Active_Cases": 3817}, {"Date": "2020-03-27", "Cases": 4678, "Active_Cases": 4369}, {"Date": "2020-03-28", "Cases": 5571, "Active_Cases": 5045}, {"Date": "2020-03-29", "Cases": 6275, "Active_Cases": 5746}, {"Date": "2020-03-30", "Cases": 7393, "Active_Cases": 6848}, {"Date": "2020-03-31", "Cases": 8521, "Active_Cases": 6829}, {"Date": "2020-04-01", "Cases": 9553, "Active_Cases": 8121}, {"Date": "2020-04-02", "Cases": 11276, "Active_Cases": 9403}, {"Date": "2020-04-03", "Cases": 12429, "Active_Cases": 10076}, {"Date": "2020-04-04", "Cases": 12968, "Active_Cases": 10174}, {"Date": "2020-04-05", "Cases": 15746, "Active_Cases": 12476}, {"Date": "2020-04-06", "Cases": 16552, "Active_Cases": 12958}, {"Date": "2020-04-07", "Cases": 17860, "Active_Cases": 13695}, {"Date": "2020-04-08", "Cases": 19129, "Active_Cases": 14569}, {"Date": "2020-04-09", "Cases": 20642, "Active_Cases": 14978}, {"Date": "2020-04-10", "Cases": 22046, "Active_Cases": 15635}, {"Date": "2020-04-11", "Cases": 23303, "Active_Cases": 16061}, {"Date": "2020-04-12", "Cases": 24286, "Active_Cases": 16450}, {"Date": "2020-04-13", "Cases": 25667, "Active_Cases": 17129}, {"Date": "2020-04-14", "Cases": 27022, "Active_Cases": 17912}, {"Date": "2020-04-15", "Cases": 28196, "Active_Cases": 18223}, {"Date": "2020-04-16", "Cases": 30796, "Active_Cases": 19840}, {"Date": "2020-04-17", "Cases": 32801, "Active_Cases": 20901}]}};
+            var b = a;
+            var c = {
                 "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
                 "config": {
                     "view": {
-                    "continuousHeight": 500,
-                    "continuousWidth": 500
+                    "continuousHeight": 300,
+                    "continuousWidth": 400
                     }
                 },
                 "data": {
@@ -84,10 +98,49 @@
                     }
                 },
                 "mark": "point"
+            };
+            function overall(number) {
+                if (number == 1) {
+                    var spec = a;
+                    var country = "Canada"
+                }
+                if (number == 2) {
+                    var spec = b;
+                    var country = "USA"
+                }
+                if (number == 3) {
+                    var spec = c;
+                    var country = "South Korea"
+                }
+                var opt = {"renderer": "canvas", "actions": true};
+                if (document.getElementById("#vis") != null) {
+                    document.getElementById("#vis").remove();
+                }
+                vegaEmbed("#vis", spec, opt);
+                changeVisibility();
+                document.querySelector('#country').textContent = country;
             }
-            var opt = {"renderer": "canvas", "actions": true};
-            vegaEmbed("#vis", spec, opt);
-            </script>
+            function per_week(number) {
+                if (number == 1) {
+                    var spec = a;
+                    var weeknum = "1st week";
+                }
+                if (number == 2) {
+                    var spec = b;
+                    var weeknum = "2nd week";
+                }
+                if (number == 3) {
+                    var spec = c;
+                    var weeknum = "3rd week";
+                }
+                if (number == 4) {
+                    var weeknum = "4th week";
+                }
+                document.querySelector('#week').textContent = weeknum;
+                // alert(document.querySelector('#country').textContent)
+            }
+        </script>
+
     </div>
 
 
