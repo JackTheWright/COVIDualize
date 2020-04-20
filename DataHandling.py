@@ -2,7 +2,7 @@
 
 import pandas
 import altair as alt
-from SGDRegression import trainData
+from Training import trainData
 
 DEBUG = False
 
@@ -16,11 +16,11 @@ def MainDataImport():
 
     # Create a Pandas dataframe to hold the imported CSV data from CanadaCovid.csv
     covidCanadaTotalCases_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/CanadaCovid.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CanadaCovid.csv")
     covidCanadaTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/CanadaCovidDeath.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CanadaCovidDeath.csv")
     covidCanadaTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/CanadaCovidRecovered.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CanadaCovidRecovered.csv")
     # Remove the columns we don't care about
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
         ['Country/Region', 'Lat', 'Long'], axis=1)
@@ -130,11 +130,11 @@ def MainDataImport():
 
 def WorstCaseDataImport():
     covidWorseTotal_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/WorstCaseData.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/WorstCaseData.csv")
     covidWorseTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/WorstCaseDeaths.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/WorstCaseDeaths.csv")
     covidWorseTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/WorstCaseRecovery.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/WorstCaseRecovery.csv")
 
     covidWorseTotal_df = covidWorseTotal_df.transpose()
     covidWorseTotal_df.columns = ['Cases']
@@ -161,17 +161,17 @@ def WorstCaseDataImport():
 
 def BestCaseDataImport():
     covidBestTotal_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/BestCaseData.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/BestCaseData.csv")
     covidBestTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/BestCaseDeaths.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/BestCaseDeaths.csv")
     covidBestTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/COVIDualize/BestCaseRecovery.csv")
+        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/BestCaseRecovery.csv")
 
     covidBestTotal_df = covidBestTotal_df.transpose()
     covidBestTotal_df.columns = ['Cases']
     covidBestTotal_df.index.name = 'Date'
     covidBestTotal_df.reset_index(inplace=True)
-    print(covidBestTotal_df)
+    # print(covidBestTotal_df)
 
     covidBestTotalDeaths_df = covidBestTotalDeaths_df.sum(axis=0, skipna=True)
     covidBestTotalDeaths_df = covidBestTotalDeaths_df.to_frame()
@@ -186,7 +186,7 @@ def BestCaseDataImport():
 
     covidBestTotal_df['Active_Cases'] = covidBestTotal_df.Cases - \
         (covidBestTotalDeaths_df.Deaths + covidBestTotalRecovered_df.Recoveries)
-    print(covidBestTotal_df)
+    # print(covidBestTotal_df)
 
     return
 
@@ -199,8 +199,8 @@ def main():
         x='Date',
         y='Active_Cases'
     ).interactive()
-
     chart.show()
+
     listDF = [covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, covicovidAB_df,
               covidBC_df, covidMN_df, covidNB_df, covidNL_df, covidNS_df, covidON_df, covidPE_df, covidQC_df, covidSA_df]
     trainData(listDF)
