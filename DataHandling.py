@@ -16,11 +16,11 @@ def MainDataImport():
 
     # Create a Pandas dataframe to hold the imported CSV data from CanadaCovid.csv
     covidCanadaTotalCases_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CanadaCovid.csv")
+        "~/Desktop/COVIDualize/CanadaCovid.csv")
     covidCanadaTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CanadaCovidDeath.csv")
+        "~/Desktop/COVIDualize/CanadaCovidDeath.csv")
     covidCanadaTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CanadaCovidRecovered.csv")
+        "~/Desktop/COVIDualize/CanadaCovidRecovered.csv")
     # Remove the columns we don't care about
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
         ['Country/Region', 'Lat', 'Long'], axis=1)
@@ -113,8 +113,8 @@ def MainDataImport():
         ['Country/Region', 'Lat', 'Long'], axis=1)
 
     columninds = ['Deaths']
-
-    # Split the covid data up by provice. One data frame per province, then drop the province column.
+    
+    # Split the covid Deaths up by provice. One data frame per province, then drop the province column.
     covidABDeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Alberta']).drop(
         ['Province'], axis=1))).transpose()
     covidABDeath_df.columns = columninds
@@ -168,7 +168,7 @@ def MainDataImport():
     covidQCDeath_df.columns = columninds
     covidQCDeath_df.index.name = 'Date'
     covidQCDeath_df.reset_index(inplace=True)
-
+    
     covidSADeath_df = (((covidCanadaTotalDeaths_df.loc[covidCanadaTotalDeaths_df['Province'] == 'Saskatchewan']).drop(
         ['Province'], axis=1))).transpose()
     covidSADeath_df.columns = columninds
@@ -178,6 +178,7 @@ def MainDataImport():
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.drop(
         ['Province'], axis=1)
 
+    # Rename the deaths column to Total_Deaths
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.sum(
         axis=0, skipna=True)
     covidCanadaTotalDeaths_df = covidCanadaTotalDeaths_df.to_frame()
@@ -197,9 +198,9 @@ def MainDataImport():
     if DEBUG:
         print(covidCanadaTotalRecovered_df)
 
+    #Calculate active cases by subtracting deaths and recoveries from total cases.
     covidCanadaTotal_df['Active_Cases'] = covidCanadaTotal_df.Cases - \
-        (covidCanadaTotalDeaths_df.Total_Deaths +
-         covidCanadaTotalRecovered_df.Recoveries)
+        (covidCanadaTotalDeaths_df.Total_Deaths + covidCanadaTotalRecovered_df.Recoveries)
 
     if DEBUG:
         print(covidCanadaTotal_df)
@@ -212,18 +213,22 @@ def MainDataImport():
 
 
 def WorstCaseDataImport():
-    covidWorseTotal_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/WorstCaseData.csv")
-    covidWorseTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/WorstCaseDeaths.csv")
-    covidWorseTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/WorstCaseRecovery.csv")
 
+    #Import data for the worst case (US)
+    covidWorseTotal_df = pandas.read_csv(
+        "~/Desktop/COVIDualize/WorstCaseData.csv")
+    covidWorseTotalDeaths_df = pandas.read_csv(
+        "~/Desktop/COVIDualize/WorstCaseDeaths.csv")
+    covidWorseTotalRecovered_df = pandas.read_csv(
+        "~/Desktop/COVIDualize/WorstCaseRecovery.csv")
+
+    # Get the total cases for the US
     covidWorseTotal_df = covidWorseTotal_df.transpose()
     covidWorseTotal_df.columns = ['Cases']
     covidWorseTotal_df.index.name = 'Date'
     covidWorseTotal_df.reset_index(inplace=True)
 
+    # Get the total deaths for the US
     covidWorseTotalDeaths_df = covidWorseTotalDeaths_df.sum(
         axis=0, skipna=True)
     covidWorseTotalDeaths_df = covidWorseTotalDeaths_df.to_frame()
@@ -231,67 +236,79 @@ def WorstCaseDataImport():
     covidWorseTotalDeaths_df.index.name = 'Date'
     covidWorseTotalDeaths_df.reset_index(inplace=True)
 
+    # Get the total recovered for the US
     covidWorseTotalRecovered_df = covidWorseTotalRecovered_df.transpose()
     covidWorseTotalRecovered_df.columns = ['Recoveries']
     covidWorseTotalRecovered_df.index.name = 'Date'
     covidWorseTotalRecovered_df.reset_index(inplace=True)
 
+    # Caluclate active cases
     covidWorseTotal_df['Active_Cases'] = covidWorseTotal_df.Cases - \
         (covidWorseTotalDeaths_df.Deaths + covidWorseTotalRecovered_df.Recoveries)
-    print(covidWorseTotal_df)
-    return covidWorseTotalDeaths_df
+    if DEBUG:
+        print(covidWorseTotal_df)
+    return covidWorseTotal_df, covidWorseTotalDeaths_df, covidWorseTotalRecovered_df
 
 
 def BestCaseDataImport():
-    covidBestTotal_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/BestCaseData.csv")
-    covidBestTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/BestCaseDeaths.csv")
-    covidBestTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/BestCaseRecovery.csv")
 
+    #Import data for the worst case (South Korea)
+    covidBestTotal_df = pandas.read_csv(
+        "~/Desktop/COVIDualize/BestCaseData.csv")
+    covidBestTotalDeaths_df = pandas.read_csv(
+        "~/Desktop/COVIDualize/BestCaseDeaths.csv")
+    covidBestTotalRecovered_df = pandas.read_csv(
+        "~/Desktop/COVIDualize/BestCaseRecovery.csv")
+
+    # Get the total cases for the South Korea
     covidBestTotal_df = covidBestTotal_df.transpose()
     covidBestTotal_df.columns = ['Cases']
     covidBestTotal_df.index.name = 'Date'
     covidBestTotal_df.reset_index(inplace=True)
-    # print(covidBestTotal_df)
+    if DEBUG:
+        print(covidBestTotal_df)
 
+    # Get the total deaths for the South Korea
     covidBestTotalDeaths_df = covidBestTotalDeaths_df.sum(axis=0, skipna=True)
     covidBestTotalDeaths_df = covidBestTotalDeaths_df.to_frame()
     covidBestTotalDeaths_df.columns = ['Deaths']
     covidBestTotalDeaths_df.index.name = 'Date'
     covidBestTotalDeaths_df.reset_index(inplace=True)
 
+    # Get the total recoveries for South Korea
     covidBestTotalRecovered_df = covidBestTotalRecovered_df.transpose()
     covidBestTotalRecovered_df.columns = ['Recoveries']
     covidBestTotalRecovered_df.index.name = 'Date'
     covidBestTotalRecovered_df.reset_index(inplace=True)
 
+    #Calculate Active Cases
     covidBestTotal_df['Active_Cases'] = covidBestTotal_df.Cases - \
         (covidBestTotalDeaths_df.Deaths + covidBestTotalRecovered_df.Recoveries)
-    # print(covidBestTotal_df)
+    if DEBUG:
+        print(covidBestTotal_df)
 
-    return covidBestTotalDeaths_df
+    return covidBestTotal_df, covidBestTotalDeaths_df, covidBestTotalRecovered_df
 
 
 def main():
+    # Save return values to dataframes
     covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, \
         covidAB_df, covidABDeath_df, covidBC_df, covidBCDeath_df, covidMN_df, covidMNDeath_df, \
         covidNB_df, covidNBDeath_df, covidNL_df, covidNLDeath_df, covidNS_df, covidNSDeath_df, \
         covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df, \
         covidSA_df, covidSADeath_df = MainDataImport()
-    worstdeaths = WorstCaseDataImport()
-    bestdeaths = BestCaseDataImport()
-    chart = alt.Chart(covidCanadaTotal_df).mark_line().encode(
-        x='Date',
-        y='Active_Cases'
-    ).interactive()
-    chart.show()
-    listDF = [covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df,
-              covidAB_df, covidABDeath_df, covidBC_df, covidBCDeath_df, covidMN_df, covidMNDeath_df,
-              covidNB_df, covidNBDeath_df, covidNL_df, covidNLDeath_df, covidNS_df, covidNSDeath_df,
-              covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df,
-              covidSA_df, covidSADeath_df, worstdeaths, bestdeaths]
+    
+    # Get the best and worse cases, recoveries and deaths from the functions
+    worstcases, worstdeaths, worstrecovered = WorstCaseDataImport()
+    bestcases, bestdeaths, bestrecovered = BestCaseDataImport()
+
+    # Add all dataframes to a list and pass that into the training function
+    listDF = [covidCanadaTotal_df, covidCanadaTotalDeaths_df, covidCanadaTotalRecovered_df, \
+        covidAB_df, covidABDeath_df, covidBC_df, covidBCDeath_df, covidMN_df, covidMNDeath_df, \
+        covidNB_df, covidNBDeath_df, covidNL_df, covidNLDeath_df, covidNS_df, covidNSDeath_df, \
+        covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df, \
+        covidSA_df, covidSADeath_df, worstcases, worstdeaths, worstrecovered, bestcases, \
+        bestdeaths, bestrecovered]
     trainData(listDF)
     return
 
