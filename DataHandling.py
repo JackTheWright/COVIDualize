@@ -7,7 +7,7 @@ from Training import trainData
 DEBUG = False
 
 # Function:     Import CSV data and create dataframes
-# Return:       11 data frames, 1 for each province and 1 for Canada's total
+# Return:       23 data frames, 2 for each province (death and total), recovered (canada), total (canada), and deaths (Canada)
 
 
 def MainDataImport():
@@ -212,6 +212,9 @@ def MainDataImport():
         covidSA_df, covidSADeath_df
 
 
+# Function:     Import CSV data and create dataframes for worst case data (US)
+# Return:       3 data frames, 1 for deaths, cases and recovered
+
 def WorstCaseDataImport():
 
     #Import data for the worst case (US)
@@ -249,6 +252,9 @@ def WorstCaseDataImport():
         print(covidWorseTotal_df)
     return covidWorseTotal_df, covidWorseTotalDeaths_df, covidWorseTotalRecovered_df
 
+
+# Function:     Import CSV data and create dataframes for best case data (South Korea)
+# Return:       3 data frames, 1 for deaths, cases and recovered
 
 def BestCaseDataImport():
 
