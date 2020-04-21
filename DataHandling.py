@@ -2,7 +2,7 @@
 
 import pandas
 import altair as alt
-from Training import trainData, trainDeathData
+from Training import trainData
 
 DEBUG = False
 
