@@ -228,7 +228,7 @@ def WorstCaseDataImport():
 
     # Get the total cases for the US
     covidWorseTotal_df = covidWorseTotal_df.transpose()
-    covidWorseTotal_df.columns = ['Cases']
+    covidWorseTotal_df.columns = ['Worst_Cases']
     covidWorseTotal_df.index.name = 'Date'
     covidWorseTotal_df.reset_index(inplace=True)
 
@@ -236,19 +236,20 @@ def WorstCaseDataImport():
     covidWorseTotalDeaths_df = covidWorseTotalDeaths_df.sum(
         axis=0, skipna=True)
     covidWorseTotalDeaths_df = covidWorseTotalDeaths_df.to_frame()
-    covidWorseTotalDeaths_df.columns = ['Deaths']
+    covidWorseTotalDeaths_df.columns = ['Worst_Deaths']
     covidWorseTotalDeaths_df.index.name = 'Date'
     covidWorseTotalDeaths_df.reset_index(inplace=True)
 
     # Get the total recovered for the US
     covidWorseTotalRecovered_df = covidWorseTotalRecovered_df.transpose()
-    covidWorseTotalRecovered_df.columns = ['Recoveries']
+    covidWorseTotalRecovered_df.columns = ['Worst_Recoveries']
     covidWorseTotalRecovered_df.index.name = 'Date'
     covidWorseTotalRecovered_df.reset_index(inplace=True)
 
     # Caluclate active cases
-    covidWorseTotal_df['Active_Cases'] = covidWorseTotal_df.Cases - \
-        (covidWorseTotalDeaths_df.Deaths + covidWorseTotalRecovered_df.Recoveries)
+    covidWorseTotal_df['Active_Cases'] = covidWorseTotal_df.Worst_Cases - \
+        (covidWorseTotalDeaths_df.Worst_Deaths +
+         covidWorseTotalRecovered_df.Worst_Recoveries)
     if DEBUG:
         print(covidWorseTotal_df)
     return covidWorseTotal_df, covidWorseTotalDeaths_df, covidWorseTotalRecovered_df
@@ -269,7 +270,7 @@ def BestCaseDataImport():
 
     # Get the total cases for the South Korea
     covidBestTotal_df = covidBestTotal_df.transpose()
-    covidBestTotal_df.columns = ['Cases']
+    covidBestTotal_df.columns = ['Best_Cases']
     covidBestTotal_df.index.name = 'Date'
     covidBestTotal_df.reset_index(inplace=True)
     if DEBUG:
@@ -278,19 +279,20 @@ def BestCaseDataImport():
     # Get the total deaths for the South Korea
     covidBestTotalDeaths_df = covidBestTotalDeaths_df.sum(axis=0, skipna=True)
     covidBestTotalDeaths_df = covidBestTotalDeaths_df.to_frame()
-    covidBestTotalDeaths_df.columns = ['Deaths']
+    covidBestTotalDeaths_df.columns = ['Best_Deaths']
     covidBestTotalDeaths_df.index.name = 'Date'
     covidBestTotalDeaths_df.reset_index(inplace=True)
 
     # Get the total recoveries for South Korea
     covidBestTotalRecovered_df = covidBestTotalRecovered_df.transpose()
-    covidBestTotalRecovered_df.columns = ['Recoveries']
+    covidBestTotalRecovered_df.columns = ['Best_Recoveries']
     covidBestTotalRecovered_df.index.name = 'Date'
     covidBestTotalRecovered_df.reset_index(inplace=True)
 
     # Calculate Active Cases
-    covidBestTotal_df['Active_Cases'] = covidBestTotal_df.Cases - \
-        (covidBestTotalDeaths_df.Deaths + covidBestTotalRecovered_df.Recoveries)
+    covidBestTotal_df['Active_Cases'] = covidBestTotal_df.Best_Cases - \
+        (covidBestTotalDeaths_df.Best_Deaths +
+         covidBestTotalRecovered_df.Best_Recoveries)
     if DEBUG:
         print(covidBestTotal_df)
 

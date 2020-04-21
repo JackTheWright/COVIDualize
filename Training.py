@@ -207,22 +207,6 @@ def trainData(listDF):
     active_df = active_df.merge(covidQC_df, on='Date')
     active_df = active_df.merge(covidSA_df, on='Date')
 
-    # create dataframe to input as deaths trainer
-    death_df = active_df.merge(covidABDeath_df, on='Date')
-    death_df = active_df.merge(covidBCDeath_df, on='Date')
-    death_df = active_df.merge(covidMNDeath_df, on='Date')
-    death_df = active_df.merge(covidNBDeath_df, on='Date')
-    death_df = active_df.merge(covidNLDeath_df, on='Date')
-    death_df = active_df.merge(covidNSDeath_df, on='Date')
-    death_df = active_df.merge(covidONDeath_df, on='Date')
-    death_df = active_df.merge(covidPEDeath_df, on='Date')
-    death_df = active_df.merge(covidQCDeath_df, on='Date')
-    death_df = active_df.merge(covidSADeath_df, on='Date')
-    death_df = active_df.merge(worstdeaths, on='Date')
-    death_df = active_df.merge(bestdeaths, on='Date')
-    active_df.dropna(inplace=True)
-    death_df.dropna(inplace=True)
-
     # create input arrays for training model
     X = np.array(active_df.drop(['Active_Cases', 'Date'], axis=1))
     y = np.array(active_df['Active_Cases'])
@@ -257,3 +241,12 @@ def trainData(listDF):
     chart(inc_df, con_df, lev_df)
 
     return
+
+
+# This function will calculate the weekly number of deaths based on a 2-3% death
+# rate of new cases and a 10 day average death time.
+
+def deathCounter(predict_df):
+    weekOneDays = predict_df[27:33]
+    weekTwoDays = predict_df[34:40]
+    #weekOneDeaths = predict_df
