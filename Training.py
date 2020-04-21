@@ -4,7 +4,7 @@ import altair as alt
 import numpy as np
 import math
 from sklearn import linear_model, preprocessing, model_selection
-from CountersForDnR import deathCounter, recoverCounter
+from CountersForDnR import deathCounter, recoverCounter, kDeathCounter, kRecoverCounter
 import datetime
 
 
@@ -498,6 +498,33 @@ def trainData(listDF):
     con_korea_df = continueTrend(
         predict_norm_korea_df, forecast_set_korea)
     lev_korea_df = levelOff(predict_best_korea_df, forecast_set_korea)
+
+    print("Death Canada\n")
+    deathCounter(inc_canada_df, 0.03)
+    deathCounter(con_canada_df, 0.025)
+    deathCounter(lev_canada_df, 0.02)
+    print("Recovered Canada\n")
+    recoverCounter(inc_canada_df)
+    recoverCounter(con_canada_df)
+    recoverCounter(lev_canada_df)
+
+    print("Death America\n")
+    deathCounter(inc_america_df, 0.03)
+    deathCounter(con_america_df, 0.025)
+    deathCounter(lev_america_df, 0.02)
+    print("Recovered America\n")
+    recoverCounter(inc_america_df)
+    recoverCounter(con_america_df)
+    recoverCounter(lev_america_df)
+
+    print("Death Korea\n")
+    kDeathCounter(inc_korea_df, 0.03)
+    kDeathCounter(con_korea_df, 0.025)
+    kDeathCounter(lev_korea_df, 0.02)
+    print("Recovered Korea\n")
+    kRecoverCounter(inc_korea_df)
+    kRecoverCounter(con_korea_df)
+    kRecoverCounter(lev_korea_df)
 
     chart_canada(inc_canada_df, con_canada_df, lev_canada_df)
     chart_america(inc_america_df, con_america_df, lev_america_df)

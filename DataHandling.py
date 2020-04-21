@@ -17,11 +17,11 @@ def MainDataImport():
 
     # Create a Pandas dataframe to hold the imported CSV data from CanadaCovid.csv
     covidCanadaTotalCases_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/CanadaCovid.csv")
+        "CSV Data/CanadaCovid.csv")
     covidCanadaTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/CanadaCovidDeath.csv")
+        "CSV Data/CanadaCovidDeath.csv")
     covidCanadaTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/CanadaCovidRecovered.csv")
+        "CSV Data/CanadaCovidRecovered.csv")
     # Remove the columns we don't care about
     covidCanadaTotalCases_df = covidCanadaTotalCases_df.drop(
         ['Country/Region', 'Lat', 'Long'], axis=1)
@@ -221,11 +221,11 @@ def WorstCaseDataImport():
 
     # Import data for the worst case (US)
     covidWorseTotal_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/WorstCaseData.csv")
+        "CSV Data/WorstCaseData.csv")
     covidWorseTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/WorstCaseDeaths.csv")
+        "CSV Data/WorstCaseDeaths.csv")
     covidWorseTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/WorstCaseRecovery.csv")
+        "CSV Data/WorstCaseRecovery.csv")
 
     # Get the total cases for the US
     covidWorseTotal_df = covidWorseTotal_df.transpose()
@@ -263,11 +263,11 @@ def BestCaseDataImport():
 
     # Import data for the worst case (South Korea)
     covidBestTotal_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/BestCaseData.csv")
+        "CSV Data/BestCaseData.csv")
     covidBestTotalDeaths_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/BestCaseDeaths.csv")
+        "CSV Data/BestCaseDeaths.csv")
     covidBestTotalRecovered_df = pandas.read_csv(
-        "~/Desktop/SCHOOL/cmpt-340/term-proj/COVIDualize/CSV Data/BestCaseRecovery.csv")
+        "CSV Data/BestCaseRecovery.csv")
 
     # Get the total cases for the South Korea
     covidBestTotal_df = covidBestTotal_df.transpose()
