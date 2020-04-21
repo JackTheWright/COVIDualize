@@ -4,6 +4,7 @@ import pandas
 import altair as alt
 from Training import trainData
 
+
 DEBUG = False
 
 # Function:     Import CSV data and create dataframes

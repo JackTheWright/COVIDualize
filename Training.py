@@ -1,8 +1,10 @@
 import pandas as pd
+import random as r
 import altair as alt
 import numpy as np
 import math
 from sklearn import linear_model, preprocessing, model_selection
+from CountersForDnR import deathCounter, recoverCounter
 import datetime
 
 
@@ -238,15 +240,9 @@ def trainData(listDF):
     con_df = continueTrend(predict_norm_df, forecast_set)
     lev_df = levelOff(predict_best_df, forecast_set)
 
+    print(con_df.tail(31))
+    deathCounter(con_df)
+
     chart(inc_df, con_df, lev_df)
 
     return
-
-
-# This function will calculate the weekly number of deaths based on a 2-3% death
-# rate of new cases and a 10 day average death time. 
-
-def deathCounter(predict_df):
-        weekOneDays = predict_df[27:33]
-        weekTwoDays = predict_df[34:40]
-        weekOneDeaths = predict_df
