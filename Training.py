@@ -185,8 +185,12 @@ def trainData(listDF):
     covidQCDeath_df = listDF[20]
     covidSA_df = listDF[21]
     covidSADeath_df = listDF[22]
-    worstdeaths = listDF[23]
-    bestdeaths = listDF[24]
+    covidAmericaTotal_df = listDF[23]
+    covidAmericaTotalDeath_df = listDF[24]
+    covidAmericaTotalRecovered_df = listDF[25]
+    covidKoreaTotal_df = listDF[26]
+    covidKoreaTotalDeath_df = listDF[27]
+    covidKoreaTotalRecovered_df = listDF[28]
 
     # create dataframe to input as active cases trainer
     active_df = covidCanadaTotal_df
