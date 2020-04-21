@@ -56,6 +56,7 @@
     <!-- Define the class for the page content where graphs will be -->
     <div class="content">
         <br>
+        <h2 id="title">Make a selection</h2>
         <div id="vis"></div>
         <script>
             Element.prototype.remove = function() {
@@ -70,74 +71,85 @@
             }
         </script>
         <script type="text/javascript">
-            var a = {"config": {"view": {"continuousWidth": 0.25, "continuousHeight": 500}}, "data": {"name": "data-f5b650ea3ea1b5176b0464306eb03049"}, "mark": "line", "encoding": {"x": {"type": "nominal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active_Cases"}}, "selection": {"selector001": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-f5b650ea3ea1b5176b0464306eb03049": [{"Date": "2020-01-22", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-23", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-24", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-25", "Cases": 0, "Active_Cases": 0}, {"Date": "2020-01-26", "Cases": 1, "Active_Cases": 1}, {"Date": "2020-01-27", "Cases": 1, "Active_Cases": 1}, {"Date": "2020-01-28", "Cases": 2, "Active_Cases": 2}, {"Date": "2020-01-29", "Cases": 2, "Active_Cases": 2}, {"Date": "2020-01-30", "Cases": 2, "Active_Cases": 2}, {"Date": "2020-01-31", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-01", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-02", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-03", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-04", "Cases": 4, "Active_Cases": 4}, {"Date": "2020-02-05", "Cases": 5, "Active_Cases": 5}, {"Date": "2020-02-06", "Cases": 5, "Active_Cases": 5}, {"Date": "2020-02-07", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-08", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-09", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-10", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-11", "Cases": 7, "Active_Cases": 7}, {"Date": "2020-02-12", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-13", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-14", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-15", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-16", "Cases": 7, "Active_Cases": 6}, {"Date": "2020-02-17", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-18", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-19", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-20", "Cases": 8, "Active_Cases": 7}, {"Date": "2020-02-21", "Cases": 9, "Active_Cases": 6}, {"Date": "2020-02-22", "Cases": 9, "Active_Cases": 6}, {"Date": "2020-02-23", "Cases": 9, "Active_Cases": 6}, {"Date": "2020-02-24", "Cases": 10, "Active_Cases": 7}, {"Date": "2020-02-25", "Cases": 11, "Active_Cases": 8}, {"Date": "2020-02-26", "Cases": 11, "Active_Cases": 8}, {"Date": "2020-02-27", "Cases": 13, "Active_Cases": 7}, {"Date": "2020-02-28", "Cases": 14, "Active_Cases": 8}, {"Date": "2020-02-29", "Cases": 20, "Active_Cases": 14}, {"Date": "2020-03-01", "Cases": 24, "Active_Cases": 18}, {"Date": "2020-03-02", "Cases": 27, "Active_Cases": 21}, {"Date": "2020-03-03", "Cases": 30, "Active_Cases": 24}, {"Date": "2020-03-04", "Cases": 33, "Active_Cases": 27}, {"Date": "2020-03-05", "Cases": 37, "Active_Cases": 31}, {"Date": "2020-03-06", "Cases": 49, "Active_Cases": 43}, {"Date": "2020-03-07", "Cases": 54, "Active_Cases": 46}, {"Date": "2020-03-08", "Cases": 64, "Active_Cases": 56}, {"Date": "2020-03-09", "Cases": 77, "Active_Cases": 68}, {"Date": "2020-03-10", "Cases": 79, "Active_Cases": 70}, {"Date": "2020-03-11", "Cases": 108, "Active_Cases": 99}, {"Date": "2020-03-12", "Cases": 117, "Active_Cases": 108}, {"Date": "2020-03-13", "Cases": 193, "Active_Cases": 184}, {"Date": "2020-03-14", "Cases": 198, "Active_Cases": 189}, {"Date": "2020-03-15", "Cases": 252, "Active_Cases": 243}, {"Date": "2020-03-16", "Cases": 415, "Active_Cases": 402}, {"Date": "2020-03-17", "Cases": 478, "Active_Cases": 464}, {"Date": "2020-03-18", "Cases": 657, "Active_Cases": 640}, {"Date": "2020-03-19", "Cases": 800, "Active_Cases": 782}, {"Date": "2020-03-20", "Cases": 943, "Active_Cases": 922}, {"Date": "2020-03-21", "Cases": 1277, "Active_Cases": 1248}, {"Date": "2020-03-22", "Cases": 1469, "Active_Cases": 1439}, {"Date": "2020-03-23", "Cases": 2088, "Active_Cases": 2054}, {"Date": "2020-03-24", "Cases": 2790, "Active_Cases": 2655}, {"Date": "2020-03-25", "Cases": 3251, "Active_Cases": 3039}, {"Date": "2020-03-26", "Cases": 4038, "Active_Cases": 3817}, {"Date": "2020-03-27", "Cases": 4678, "Active_Cases": 4369}, {"Date": "2020-03-28", "Cases": 5571, "Active_Cases": 5045}, {"Date": "2020-03-29", "Cases": 6275, "Active_Cases": 5746}, {"Date": "2020-03-30", "Cases": 7393, "Active_Cases": 6848}, {"Date": "2020-03-31", "Cases": 8521, "Active_Cases": 6829}, {"Date": "2020-04-01", "Cases": 9553, "Active_Cases": 8121}, {"Date": "2020-04-02", "Cases": 11276, "Active_Cases": 9403}, {"Date": "2020-04-03", "Cases": 12429, "Active_Cases": 10076}, {"Date": "2020-04-04", "Cases": 12968, "Active_Cases": 10174}, {"Date": "2020-04-05", "Cases": 15746, "Active_Cases": 12476}, {"Date": "2020-04-06", "Cases": 16552, "Active_Cases": 12958}, {"Date": "2020-04-07", "Cases": 17860, "Active_Cases": 13695}, {"Date": "2020-04-08", "Cases": 19129, "Active_Cases": 14569}, {"Date": "2020-04-09", "Cases": 20642, "Active_Cases": 14978}, {"Date": "2020-04-10", "Cases": 22046, "Active_Cases": 15635}, {"Date": "2020-04-11", "Cases": 23303, "Active_Cases": 16061}, {"Date": "2020-04-12", "Cases": 24286, "Active_Cases": 16450}, {"Date": "2020-04-13", "Cases": 25667, "Active_Cases": 17129}, {"Date": "2020-04-14", "Cases": 27022, "Active_Cases": 17912}, {"Date": "2020-04-15", "Cases": 28196, "Active_Cases": 18223}, {"Date": "2020-04-16", "Cases": 30796, "Active_Cases": 19840}, {"Date": "2020-04-17", "Cases": 32801, "Active_Cases": 20901}]}};
-            var b = a;
-            var c = {
-                "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-                "config": {
-                    "view": {
-                    "continuousHeight": 300,
-                    "continuousWidth": 400
-                    }
-                },
-                "data": {
-                    "url": "https://vega.github.io/vega-datasets/data/cars.json"
-                },
-                "encoding": {
-                    "color": {
-                    "field": "Origin",
-                    "type": "nominal"
-                    },
-                    "x": {
-                    "field": "Horsepower",
-                    "type": "quantitative"
-                    },
-                    "y": {
-                    "field": "Miles_per_Gallon",
-                    "type": "quantitative"
-                    }
-                },
-                "mark": "point"
-            };
+            var Canada= {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-7622765fac43c076b87bab4566c1dc6c"}, "mark": "line", "encoding": {"color": {"type": "nominal", "field": "Curve"}, "x": {"type": "temporal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active Cases"}}, "selection": {"selector001": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Predicted Amount of Active Cases for the Next Month", "transform": [{"fold": ["Worst", "Norm", "Best"], "as": ["Curve", "Active Cases"]}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-7622765fac43c076b87bab4566c1dc6c": [{"Date": "2020-03-12", "Worst": 108.0, "Norm": 108.0, "Best": 108.0}, {"Date": "2020-03-13", "Worst": 184.0, "Norm": 184.0, "Best": 184.0}, {"Date": "2020-03-14", "Worst": 189.0, "Norm": 189.0, "Best": 189.0}, {"Date": "2020-03-15", "Worst": 243.0, "Norm": 243.0, "Best": 243.0}, {"Date": "2020-03-16", "Worst": 402.0, "Norm": 402.0, "Best": 402.0}, {"Date": "2020-03-17", "Worst": 464.0, "Norm": 464.0, "Best": 464.0}, {"Date": "2020-03-18", "Worst": 640.0, "Norm": 640.0, "Best": 640.0}, {"Date": "2020-03-19", "Worst": 782.0, "Norm": 782.0, "Best": 782.0}, {"Date": "2020-03-20", "Worst": 922.0, "Norm": 922.0, "Best": 922.0}, {"Date": "2020-03-21", "Worst": 1248.0, "Norm": 1248.0, "Best": 1248.0}, {"Date": "2020-03-22", "Worst": 1439.0, "Norm": 1439.0, "Best": 1439.0}, {"Date": "2020-03-23", "Worst": 2054.0, "Norm": 2054.0, "Best": 2054.0}, {"Date": "2020-03-24", "Worst": 2655.0, "Norm": 2655.0, "Best": 2655.0}, {"Date": "2020-03-25", "Worst": 3039.0, "Norm": 3039.0, "Best": 3039.0}, {"Date": "2020-03-26", "Worst": 3817.0, "Norm": 3817.0, "Best": 3817.0}, {"Date": "2020-03-27", "Worst": 4369.0, "Norm": 4369.0, "Best": 4369.0}, {"Date": "2020-03-28", "Worst": 5045.0, "Norm": 5045.0, "Best": 5045.0}, {"Date": "2020-03-29", "Worst": 5746.0, "Norm": 5746.0, "Best": 5746.0}, {"Date": "2020-03-30", "Worst": 6848.0, "Norm": 6848.0, "Best": 6848.0}, {"Date": "2020-03-31", "Worst": 6829.0, "Norm": 6829.0, "Best": 6829.0}, {"Date": "2020-04-01", "Worst": 8121.0, "Norm": 8121.0, "Best": 8121.0}, {"Date": "2020-04-02", "Worst": 9403.0, "Norm": 9403.0, "Best": 9403.0}, {"Date": "2020-04-03", "Worst": 10076.0, "Norm": 10076.0, "Best": 10076.0}, {"Date": "2020-04-04", "Worst": 10174.0, "Norm": 10174.0, "Best": 10174.0}, {"Date": "2020-04-05", "Worst": 12476.0, "Norm": 12476.0, "Best": 12476.0}, {"Date": "2020-04-06", "Worst": 12958.0, "Norm": 12958.0, "Best": 12958.0}, {"Date": "2020-04-07", "Worst": 13695.0, "Norm": 13695.0, "Best": 13695.0}, {"Date": "2020-04-08", "Worst": 14569.0, "Norm": 14569.0, "Best": 14569.0}, {"Date": "2020-04-09", "Worst": 14978.0, "Norm": 14978.0, "Best": 14978.0}, {"Date": "2020-04-10", "Worst": 15635.0, "Norm": 15635.0, "Best": 15635.0}, {"Date": "2020-04-11", "Worst": 16061.0, "Norm": 16061.0, "Best": 16061.0}, {"Date": "2020-04-12", "Worst": 16450.0, "Norm": 16450.0, "Best": 16450.0}, {"Date": "2020-04-13", "Worst": 17129.0, "Norm": 17129.0, "Best": 17129.0}, {"Date": "2020-04-14", "Worst": 17912.0, "Norm": 17912.0, "Best": 17912.0}, {"Date": "2020-04-15", "Worst": 18223.0, "Norm": 18223.0, "Best": 18223.0}, {"Date": "2020-04-16", "Worst": 19840.0, "Norm": 19840.0, "Best": 19840.0}, {"Date": "2020-04-17", "Worst": 20901.0, "Norm": 20901.0, "Best": 20901.0}, {"Date": "2020-04-18 00:00:00", "Worst": 22559.273451128614, "Norm": 21902.20723410545, "Best": 21639.380747296185}, {"Date": "2020-04-19 00:00:00", "Worst": 23351.85916421647, "Norm": 22011.366918858017, "Best": 21486.26374964174}, {"Date": "2020-04-20 00:00:00", "Worst": 24440.221298804296, "Norm": 22366.264674346196, "Best": 21570.70272350369}, {"Date": "2020-04-21 00:00:00", "Worst": 25508.4744957081, "Norm": 22663.949201524327, "Best": 21595.505108704045}, {"Date": "2020-04-22 00:00:00", "Worst": 26698.40840678135, "Norm": 23030.281620765603, "Best": 21681.23274783609}, {"Date": "2020-04-23 00:00:00", "Worst": 28012.187161833186, "Norm": 23459.76574331127, "Best": 21820.532196264663}, {"Date": "2020-04-24 00:00:00", "Worst": 29248.625491014533, "Norm": 23781.809105204746, "Best": 21854.63214339783}, {"Date": "2020-04-25 00:00:00", "Worst": 31261.41324041957, "Norm": 24678.048289691138, "Best": 22406.10497806625}, {"Date": "2020-04-26 00:00:00", "Worst": 33090.96885575388, "Norm": 25361.47222051161, "Best": 22750.291298277854}, {"Date": "2020-04-27 00:00:00", "Worst": 35389.62951185357, "Norm": 26333.207970219795, "Best": 23338.514782128237}, {"Date": "2020-04-28 00:00:00", "Worst": 37331.14968301885, "Norm": 26968.816810905948, "Best": 23615.018152878412}, {"Date": "2020-04-29 00:00:00", "Worst": 39740.21836997324, "Norm": 27872.989599174412, "Best": 24113.868474652412}, {"Date": "2020-04-30 00:00:00", "Worst": 42190.110539401285, "Norm": 28729.412306265585, "Best": 24556.53133423241}, {"Date": "2020-05-01 00:00:00", "Worst": 44572.67100279774, "Norm": 29467.78645284482, "Best": 24885.40643649973}, {"Date": "2020-05-02 00:00:00", "Worst": 47822.24184954928, "Norm": 30695.277282428495, "Best": 25610.952442991525}, {"Date": "2020-05-03 00:00:00", "Worst": 50284.69508150886, "Norm": 31335.759523560588, "Best": 25831.601906191412}, {"Date": "2020-05-04 00:00:00", "Worst": 52455.20694875089, "Norm": 31736.262874185188, "Best": 25847.815363930455}, {"Date": "2020-05-05 00:00:00", "Worst": 56149.59677236989, "Norm": 32981.970363918685, "Best": 26540.04162621996}, {"Date": "2020-05-06 00:00:00", "Worst": 58810.046963559435, "Norm": 33538.548019470996, "Best": 26664.055460906442}, {"Date": "2020-05-07 00:00:00", "Worst": 61796.330118363396, "Norm": 34215.12968423255, "Best": 26875.532762872135}, {"Date": "2020-05-08 00:00:00", "Worst": 64572.680685499115, "Norm": 34710.997745997156, "Best": 26937.850213480688}, {"Date": "2020-05-09 00:00:00", "Worst": 68113.29647144894, "Norm": 35547.81863884143, "Best": 27256.226947589854}, {"Date": "2020-05-10 00:00:00", "Worst": 71850.9492181722, "Norm": 36406.28308568883, "Best": 27579.479604447213}, {"Date": "2020-05-11 00:00:00", "Worst": 75579.28262552274, "Norm": 37179.99889183312, "Best": 27827.61861441876}, {"Date": "2020-05-12 00:00:00", "Worst": 78787.69836010077, "Norm": 37629.44352609181, "Best": 27826.04035275378}, {"Date": "2020-05-13 00:00:00", "Worst": 82741.86601270172, "Norm": 38366.96700851293, "Best": 28030.963630753013}, {"Date": "2020-05-14 00:00:00", "Worst": 86750.8297086153, "Norm": 39054.27411339848, "Best": 28190.71389746728}, {"Date": "2020-05-15 00:00:00", "Worst": 90874.51608826299, "Norm": 39719.13843779154, "Best": 28326.58813030401}, {"Date": "2020-05-16 00:00:00", "Worst": 96436.49559897064, "Norm": 40922.476100516564, "Best": 28834.557880857286}, {"Date": "2020-05-17 00:00:00", "Worst": 101842.284205868, "Norm": 41957.67265167352, "Best": 29209.20440877735}]}};
+            var USA = Canada;
+            var South_Korea = Canada;
             function overall(number) {
                 if (number == 1) {
-                    var spec = a;
+                    var spec = Canada;
                     var country = "Canada"
                 }
                 if (number == 2) {
-                    var spec = b;
+                    var spec = USA;
                     var country = "USA"
                 }
                 if (number == 3) {
-                    var spec = c;
+                    var spec = South_Korea;
                     var country = "South Korea"
                 }
-                var opt = {"renderer": "canvas", "actions": true};
                 if (document.getElementById("#vis") != null) {
                     document.getElementById("#vis").remove();
                 }
+                var opt = {"renderer": "canvas", "actions": true};
                 vegaEmbed("#vis", spec, opt);
                 changeVisibility();
                 document.querySelector('#country').textContent = country;
+                document.querySelector('#title').textContent = country;
             }
             function per_week(number) {
+                the_country = document.querySelector('#country').textContent;
                 if (number == 1) {
-                    var spec = a;
+                    if (the_country == "Canada") {
+                        var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-41a9a267da565476c1f94dabf3a1d093"}, "mark": "line", "encoding": {"color": {"type": "nominal", "field": "Curve"}, "x": {"type": "temporal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active Cases", "scale": {"zero": false}}}, "selection": {"selector002": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Predicted Amount of Active Cases for Week 1 of Next Month", "transform": [{"fold": ["Worst", "Norm", "Best"], "as": ["Curve", "Active Cases"]}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-41a9a267da565476c1f94dabf3a1d093": [{"Date": "2020-04-18 00:00:00", "Worst": 22559.273451128614, "Norm": 21902.20723410545, "Best": 21639.380747296185}, {"Date": "2020-04-19 00:00:00", "Worst": 23351.85916421647, "Norm": 22011.366918858017, "Best": 21486.26374964174}, {"Date": "2020-04-20 00:00:00", "Worst": 24440.221298804296, "Norm": 22366.264674346196, "Best": 21570.70272350369}, {"Date": "2020-04-21 00:00:00", "Worst": 25508.4744957081, "Norm": 22663.949201524327, "Best": 21595.505108704045}, {"Date": "2020-04-22 00:00:00", "Worst": 26698.40840678135, "Norm": 23030.281620765603, "Best": 21681.23274783609}, {"Date": "2020-04-23 00:00:00", "Worst": 28012.187161833186, "Norm": 23459.76574331127, "Best": 21820.532196264663}, {"Date": "2020-04-24 00:00:00", "Worst": 29248.625491014533, "Norm": 23781.809105204746, "Best": 21854.63214339783}]}};
+                    }
+                    if (the_country == "USA") {
+                        var spec = Canada;
+                    }
+                    if (the_country == "South Korea") {
+                        var spec = Canada;
+                    }
                     var weeknum = "1st week";
                 }
                 if (number == 2) {
-                    var spec = b;
+                    if (the_country == "Canada") {
+                        var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-2548b864754dcda0369571a81a7c4fe1"}, "mark": "line", "encoding": {"color": {"type": "nominal", "field": "Curve"}, "x": {"type": "temporal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active Cases", "scale": {"zero": false}}}, "selection": {"selector003": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Predicted Amount of Active Cases for Week 2 of Next Month", "transform": [{"fold": ["Worst", "Norm", "Best"], "as": ["Curve", "Active Cases"]}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-2548b864754dcda0369571a81a7c4fe1": [{"Date": "2020-04-25 00:00:00", "Worst": 31261.41324041957, "Norm": 24678.048289691138, "Best": 22406.10497806625}, {"Date": "2020-04-26 00:00:00", "Worst": 33090.96885575388, "Norm": 25361.47222051161, "Best": 22750.291298277854}, {"Date": "2020-04-27 00:00:00", "Worst": 35389.62951185357, "Norm": 26333.207970219795, "Best": 23338.514782128237}, {"Date": "2020-04-28 00:00:00", "Worst": 37331.14968301885, "Norm": 26968.816810905948, "Best": 23615.018152878412}, {"Date": "2020-04-29 00:00:00", "Worst": 39740.21836997324, "Norm": 27872.989599174412, "Best": 24113.868474652412}, {"Date": "2020-04-30 00:00:00", "Worst": 42190.110539401285, "Norm": 28729.412306265585, "Best": 24556.53133423241}, {"Date": "2020-05-01 00:00:00", "Worst": 44572.67100279774, "Norm": 29467.78645284482, "Best": 24885.40643649973}]}};
+                    }
+                    if (the_country == "USA") {
+                        var spec = Canada;
+                    }
+                    if (the_country == "South Korea") {
+                        var spec = Canada;
+                    }
                     var weeknum = "2nd week";
                 }
                 if (number == 3) {
-                    var spec = c;
+                    if (the_country == "Canada") {
+                        var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-ea3f0bc6ce40ad25c9372ef55eabaed6"}, "mark": "line", "encoding": {"color": {"type": "nominal", "field": "Curve"}, "x": {"type": "temporal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active Cases", "scale": {"zero": false}}}, "selection": {"selector004": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Predicted Amount of Active Cases for Week 3 of Next Month", "transform": [{"fold": ["Worst", "Norm", "Best"], "as": ["Curve", "Active Cases"]}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-ea3f0bc6ce40ad25c9372ef55eabaed6": [{"Date": "2020-05-02 00:00:00", "Worst": 47822.24184954928, "Norm": 30695.277282428495, "Best": 25610.952442991525}, {"Date": "2020-05-03 00:00:00", "Worst": 50284.69508150886, "Norm": 31335.759523560588, "Best": 25831.601906191412}, {"Date": "2020-05-04 00:00:00", "Worst": 52455.20694875089, "Norm": 31736.262874185188, "Best": 25847.815363930455}, {"Date": "2020-05-05 00:00:00", "Worst": 56149.59677236989, "Norm": 32981.970363918685, "Best": 26540.04162621996}, {"Date": "2020-05-06 00:00:00", "Worst": 58810.046963559435, "Norm": 33538.548019470996, "Best": 26664.055460906442}, {"Date": "2020-05-07 00:00:00", "Worst": 61796.330118363396, "Norm": 34215.12968423255, "Best": 26875.532762872135}, {"Date": "2020-05-08 00:00:00", "Worst": 64572.680685499115, "Norm": 34710.997745997156, "Best": 26937.850213480688}]}};
+                    }
+                    if (the_country == "USA") {
+                        var spec = Canada;
+                    }
+                    if (the_country == "South Korea") {
+                        var spec = Canada;
+                    }
                     var weeknum = "3rd week";
                 }
                 if (number == 4) {
+                    if (the_country == "Canada") {
+                        var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-d9ce96b39a173c3229ee9dbf14fe7a91"}, "mark": "line", "encoding": {"color": {"type": "nominal", "field": "Curve"}, "x": {"type": "temporal", "field": "Date"}, "y": {"type": "quantitative", "field": "Active Cases", "scale": {"zero": false}}}, "selection": {"selector005": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Predicted Amount of Active Cases for Week 4 of Next Month", "transform": [{"fold": ["Worst", "Norm", "Best"], "as": ["Curve", "Active Cases"]}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-d9ce96b39a173c3229ee9dbf14fe7a91": [{"Date": "2020-05-09 00:00:00", "Worst": 68113.29647144894, "Norm": 35547.81863884143, "Best": 27256.226947589854}, {"Date": "2020-05-10 00:00:00", "Worst": 71850.9492181722, "Norm": 36406.28308568883, "Best": 27579.479604447213}, {"Date": "2020-05-11 00:00:00", "Worst": 75579.28262552274, "Norm": 37179.99889183312, "Best": 27827.61861441876}, {"Date": "2020-05-12 00:00:00", "Worst": 78787.69836010077, "Norm": 37629.44352609181, "Best": 27826.04035275378}, {"Date": "2020-05-13 00:00:00", "Worst": 82741.86601270172, "Norm": 38366.96700851293, "Best": 28030.963630753013}, {"Date": "2020-05-14 00:00:00", "Worst": 86750.8297086153, "Norm": 39054.27411339848, "Best": 28190.71389746728}, {"Date": "2020-05-15 00:00:00", "Worst": 90874.51608826299, "Norm": 39719.13843779154, "Best": 28326.58813030401}]}};
+                    }
+                    if (the_country == "USA") {
+                        var spec = Canada;
+                    }
+                    if (the_country == "South Korea") {
+                        var spec = Canada;
+                    }
                     var weeknum = "4th week";
                 }
+                var opt = {"renderer": "canvas", "actions": true};
+                vegaEmbed("#vis", spec, opt);
                 document.querySelector('#week').textContent = weeknum;
-                // alert(document.querySelector('#country').textContent)
+                document.querySelector('#title').textContent = document.querySelector('#country').textContent + " - " + weeknum;
             }
         </script>
 
