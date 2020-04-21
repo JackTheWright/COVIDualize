@@ -14,15 +14,15 @@ def expoIncrease(predict_df, forecast_set):
     one_day = 86400
     next_unix = last_unix + one_day
     index = 87
-    diff = predict_df.loc[index - 1][1] - forecast_set[0]
-    mult = 1.02
+    diff = (predict_df.loc[index - 1][1] - forecast_set[0])*1.05
+    mult = 1.0
 
     for i in forecast_set:
         next_date = datetime.datetime.fromtimestamp(next_unix)
         next_unix += one_day
+        mult *= 1.03
         predict_df.loc[index] = [str(next_date)] + [mult*(i + diff)]
         index += 1
-        mult *= 1.03
 
     return predict_df
 
@@ -35,15 +35,15 @@ def continueTrend(predict_df, forecast_set):
     one_day = 86400
     next_unix = last_unix + one_day
     index = 87
-    diff = predict_df.loc[index - 1][1] - forecast_set[0]
-    mult = 1
+    diff = (predict_df.loc[index - 1][1] - forecast_set[0])*1.05
+    mult = 1.0
 
     for i in forecast_set:
         next_date = datetime.datetime.fromtimestamp(next_unix)
         next_unix += one_day
+        mult *= 1
         predict_df.loc[index] = [str(next_date)] + [mult*(i + diff)]
         index += 1
-        mult *= 1
 
     return predict_df
 
@@ -56,17 +56,15 @@ def levelOff(predict_df, forecast_set):
     one_day = 86400
     next_unix = last_unix + one_day
     index = 87
-    diff = predict_df.loc[index - 1][1] - forecast_set[0]
-    if (diff <= 0):
-        diff = 0
-    mult = 1
+    diff = (predict_df.loc[index - 1][1] - forecast_set[0])*1.05
+    mult = 1.0
 
     for i in forecast_set:
         next_date = datetime.datetime.fromtimestamp(next_unix)
         next_unix += one_day
+        mult *= 0.988
         predict_df.loc[index] = [str(next_date)] + [mult*(i + diff)]
         index += 1
-        mult *= 0.988
 
     return predict_df
 
@@ -82,19 +80,84 @@ def chart(worst_df, norm_df, best_df):
 
     trimmed_total = trimmed_worst.merge(trimmed_norm, on='Date')
     trimmed_total = trimmed_total.merge(trimmed_best, on='Date')
-    print(trimmed_total)
+    print(trimmed_total.tail(31))
 
-    chart = alt.Chart(trimmed_total).transform_fold(
+    # chart entire prediction
+    chart_full = alt.Chart(trimmed_total).transform_fold(
         ['Worst', 'Norm', 'Best'],
         as_=['Curve', 'Active Cases']
     ).mark_line().encode(
         x='Date:T',
         y='Active Cases:Q',
         color='Curve:N'
-    )
+    ).properties(
+        title='Predicted Amount of Active Cases for the Next Month'
+    ).interactive()
 
-    chart.show()
-    chart.save("JSON_charts/CAN_Full_Chart.json")
+    chart_full.show()
+    chart_full.save("JSON_charts/CAN_Full_Chart.json")
+
+    # trim dataframes for individual predicted weeks
+    trimmed_week_1 = trimmed_total.loc[37:43]
+    trimmed_week_2 = trimmed_total.loc[44:50]
+    trimmed_week_3 = trimmed_total.loc[51:57]
+    trimmed_week_4 = trimmed_total.loc[58:64]
+
+    chart_1 = alt.Chart(trimmed_week_1).transform_fold(
+        ['Worst', 'Norm', 'Best'],
+        as_=['Curve', 'Active Cases']
+    ).mark_line().encode(
+        x='Date:T',
+        y=alt.Y('Active Cases:Q', scale=alt.Scale(zero=False)),
+        color='Curve:N'
+    ).properties(
+        title='Predicted Amount of Active Cases for Week 1 of Next Month'
+    ).interactive()
+
+    chart_1.show()
+    chart_1.save("JSON_charts/CAN_Week_1_Chart.json")
+
+    chart_2 = alt.Chart(trimmed_week_2).transform_fold(
+        ['Worst', 'Norm', 'Best'],
+        as_=['Curve', 'Active Cases']
+    ).mark_line().encode(
+        x='Date:T',
+        y=alt.Y('Active Cases:Q', scale=alt.Scale(zero=False)),
+        color='Curve:N'
+    ).properties(
+        title='Predicted Amount of Active Cases for Week 2 of Next Month'
+    ).interactive()
+
+    chart_2.show()
+    chart_2.save("JSON_charts/CAN_Week_2_Chart.json")
+
+    chart_3 = alt.Chart(trimmed_week_3).transform_fold(
+        ['Worst', 'Norm', 'Best'],
+        as_=['Curve', 'Active Cases']
+    ).mark_line().encode(
+        x='Date:T',
+        y=alt.Y('Active Cases:Q', scale=alt.Scale(zero=False)),
+        color='Curve:N'
+    ).properties(
+        title='Predicted Amount of Active Cases for Week 3 of Next Month'
+    ).interactive()
+
+    chart_3.show()
+    chart_3.save("JSON_charts/CAN_Week_3_Chart.json")
+
+    chart_4 = alt.Chart(trimmed_week_4).transform_fold(
+        ['Worst', 'Norm', 'Best'],
+        as_=['Curve', 'Active Cases']
+    ).mark_line().encode(
+        x='Date:T',
+        y=alt.Y('Active Cases:Q', scale=alt.Scale(zero=False)),
+        color='Curve:N'
+    ).properties(
+        title='Predicted Amount of Active Cases for Week 4 of Next Month'
+    ).interactive()
+
+    chart_4.show()
+    chart_4.save("JSON_charts/CAN_Week_4_Chart.json")
 
 
 def trainData(listDF):
