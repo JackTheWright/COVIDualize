@@ -20,3 +20,7 @@ pip install numpy)
 python DataHandler.py
 ```
 The graphs will come up one at a time on browser, you must close the current one to view the next one.
+
+## To Open the UI which shows the graphs along with information
+
+Open up UI.html in your favorite browser (tested on Chrome and Safari)
