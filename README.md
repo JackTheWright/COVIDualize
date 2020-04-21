@@ -1,2 +1,22 @@
 # COVIDualize
-In this project, we will develop a model to display the predicted spread of COVID-19 given the impact of different scenarios. These scenarios include: discovering and developing vaccinations, committing to social isolation, having a total population lockdown, or not performing any virus countermeasures. The aim is to properly visualize the effects of such scenarios through an interactive web interface. The interface will include a map that changes with the change of a certain number of parameters with the display of relevant statistics. 
+
+This is our project for cmpt 340 at Simon Fraser University. It forecasts the best, current, and worst case outcomes for the next 30 days of the covid-19 pandemic for three countries. Canada, U.S. and South Korea.
+
+## Required Packages
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install altair, altair_viewer, sklearn, pandas, numpy.
+
+```bash
+pip install altair
+pip install altair_viewer 
+pip install sklearn 
+pip install pandas 
+pip install numpy)
+```
+
+## To run the scripts that create the graphs and model
+
+```bash
+python DataHandler.py
+```
+The graphs will come up one at a time on browser, you must close the current one to view the next one.
