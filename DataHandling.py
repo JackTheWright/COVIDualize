@@ -315,8 +315,7 @@ def main():
         covidON_df, covidONDeath_df, covidPE_df, covidPEDeath_df, covidQC_df, covidQCDeath_df, \
         covidSA_df, covidSADeath_df, worstcases, worstdeaths, worstrecovered, bestcases, \
         bestdeaths, bestrecovered]
-    #trainData(listDF)
-    trainDeathData(listDF)
+    trainData(listDF)
     return
 
 
