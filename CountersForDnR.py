@@ -66,10 +66,10 @@ def recoverCounter(predict_df):
     weekFourDiff = predictlist[94][0] - predictlist[88][0]
 
     # Calculate deaths for the week at a 80-83% recovery rate.
-    weekOneRecovery = r.uniform(0.80, 0.83) * weekOneDiff
-    weekTwoRecovery = r.uniform(0.80, 0.83) * weekTwoDiff
-    weekThreeRecovery = r.uniform(0.80, 0.83) * weekThreeDiff
-    weekFourRecovery = r.uniform(0.80, 0.83) * weekFourDiff
+    weekOneRecovery = r.uniform(0.90, 0.93) * weekOneDiff
+    weekTwoRecovery = r.uniform(0.90, 0.93) * weekTwoDiff
+    weekThreeRecovery = r.uniform(0.90, 0.93) * weekThreeDiff
+    weekFourRecovery = r.uniform(0.90, 0.93) * weekFourDiff
 
     print(weekOneRecovery)
     print(weekTwoRecovery)
@@ -89,10 +89,10 @@ def kRecoverCounter(predict_df):
     weekFourDiff = - predictlist[94][0] + predictlist[88][0]
 
     # Calculate deaths for the week at a 80-83% recovery rate.
-    weekOneRecovery = r.uniform(0.80, 0.83) * weekOneDiff
-    weekTwoRecovery = r.uniform(0.80, 0.83) * weekTwoDiff
-    weekThreeRecovery = r.uniform(0.80, 0.83) * weekThreeDiff
-    weekFourRecovery = r.uniform(0.80, 0.83) * weekFourDiff
+    weekOneRecovery = r.uniform(0.90, 0.93) * weekOneDiff
+    weekTwoRecovery = r.uniform(0.90, 0.93) * weekTwoDiff
+    weekThreeRecovery = r.uniform(0.90, 0.93) * weekThreeDiff
+    weekFourRecovery = r.uniform(0.90, 0.89) * weekFourDiff
 
     print(weekOneRecovery)
     print(weekTwoRecovery)
